@@ -20,13 +20,16 @@ namespace Page
     /// </summary>
     public partial class MainWindow : Window
     {
+        int b;
         public static Model.ToiletPaperEntities db = new Model.ToiletPaperEntities();
+        public List<Model.Product> products = new List<Model.Product>();
         public MainWindow()
         {
             InitializeComponent();
             RefreshComboBox();
             RefreshButtons();
             SortiriedCB();
+            RefreshFilter();
         }
 
         private void CBNumberWrite_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -123,6 +126,49 @@ namespace Page
             var r = from gg in db.Material
                     orderby gg.Cost
                     select gg;
+        }
+        private void RefreshFilter()
+        {
+            SortCB.Items.Add("Фильтрация");
+
+            foreach (var item in db.TypeProd)
+                SortCB.Items.Add(item.NameType);
+        }
+
+        private void SortCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox combobox = (ComboBox)sender;
+            string item = Convert.ToString(combobox.SelectedItem);
+
+            if (item == "Фильтрация")
+            {
+                DGWrites.ItemsSource = users;
+                return;
+            }
+
+            products = db.Product.Where(z => z.TypeProd.NameType == item).ToList();
+            DGWrites.ItemsSource = products;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            foreach (var flig in MainWindow.db.Product)
+            {
+                if (flig.Name == Poisk.Text.Trim())
+                {
+                    b++;
+                    DGWrites.ItemsSource = MainWindow.db.Product.Where(c => c.Name.ToLower() == Poisk.Text.ToLower()).ToList(); 
+                }
+            }
+            if (b == 0)
+            {
+                MessageBox.Show("Такого товара не найдено");
+            }
+        }
+
+        private void Poisk_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 
