@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Page"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="#FFFFFF" Foreground="#00CC76">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -16,7 +16,7 @@
             <TextBlock Text="Количество записей: " Margin="5" VerticalAlignment="Center"/>
             <ComboBox SelectedIndex="0" SelectionChanged="CBNumberWrite_SelectionChanged" x:Name="CBNumberWrite" Margin="5"/>
         </WrapPanel>
-        <DataGrid Margin="5" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" x:Name="DGWrites">
+        <DataGrid Margin="5" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" x:Name="DGWrites" Background="#CEFFF9">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -32,15 +32,17 @@
                 <DataGridTextColumn Binding="{Binding MinCostForAgent}" Header="Стоимость" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="Kol" Click="Kol_Click" Content="Добавить" Margin="38,3,675,4" Background="#CEFFF9" Grid.Row="2"/>
         <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
-            <Button x:Name="BLeft" Click="BLeft_Click" Content="&lt;" Width="50" Margin="5"/>
+
+            <Button x:Name="BLeft" Click="BLeft_Click" Content="&lt;" Width="50" Margin="5" Background="#CEFFF9"/>
             <ScrollViewer MaxWidth="300" Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <WrapPanel x:Name="WPButtons"/>
             </ScrollViewer>
-            <Button x:Name="BRight" Click="BRight_Click" Content="&gt;" Margin="5" Width="50"/>
+            <Button x:Name="BRight" Click="BRight_Click" Content="&gt;" Margin="5" Width="50" Background="#CEFFF9"/>
         </WrapPanel>
-        <TextBlock Text="Сортировка: " VerticalAlignment="Top" Margin="522,6,209,0"/>
-        <ComboBox SelectedIndex="0" SelectionChanged="CBSortiried_SelectionChanged" x:Name="CBSortiried" Margin="599,4,97,6"/>
+        <TextBlock Text="Сортировка: " VerticalAlignment="Top" Margin="522,6,198,0"/>
+        <ComboBox SelectedIndex="0" SelectionChanged="CBSortiried_SelectionChanged" x:Name="CBSortiried" Margin="599,4,89,6"/>
         <Button Margin="708,6,10,7" Content="Сортировать" Click="Button_Click_3"/>
         <ComboBox
                 x:Name="SortCB"
@@ -50,6 +52,6 @@
                 Margin="319,5,329,5"
                 Text=""
             x:Name="Poisk" TextChanged="Poisk_TextChanged"/>
-        <Button Content="поиск" HorizontalAlignment="Left" Margin="476,5,0,7" Width="41" Click="Button_Click_1"/>
+
     </Grid>
 </Window>

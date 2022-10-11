@@ -148,25 +148,9 @@ namespace Page
             DGWrites.ItemsSource = products;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            foreach (var flig in MainWindow.db.Product)
-            {
-                if (flig.Name == Poisk.Text.Trim())
-                {
-                    b++;
-                    DGWrites.ItemsSource = MainWindow.db.Product.Where(c => c.Name.ToLower() == Poisk.Text.ToLower()).ToList();
-                }
-            }
-            if (b == 0)
-            {
-                MessageBox.Show("Такого товара не найдено!!");
-            }
-        }
-
         private void Poisk_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            DGWrites.ItemsSource = products.Where(x => x.Name.Contains(Poisk.Text)).ToList();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -186,6 +170,13 @@ namespace Page
                 DGWrites.ItemsSource = f;
             }
 
+        }
+
+        private void Kol_Click(object sender, RoutedEventArgs e)
+        {
+            AddPictyre ad = new AddPictyre();
+            this.Close();
+            ad.Show();
         }
     }
 
