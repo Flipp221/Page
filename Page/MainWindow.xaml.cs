@@ -160,7 +160,7 @@ namespace Page
             }
             if (b == 0)
             {
-                MessageBox.Show("Такого товара не найдено");
+                MessageBox.Show("Такого товара не найдено!!");
             }
         }
 
