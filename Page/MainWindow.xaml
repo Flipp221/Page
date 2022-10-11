@@ -39,19 +39,17 @@
             </ScrollViewer>
             <Button x:Name="BRight" Click="BRight_Click" Content="&gt;" Margin="5" Width="50"/>
         </WrapPanel>
-        <WrapPanel Margin="583,0,29,0">
-            <TextBlock Text="Сортировка: " Margin="5" VerticalAlignment="Center"/>
-            <ComboBox SelectedIndex="0" SelectionChanged="CBSortiried_SelectionChanged" x:Name="CBSortiried" Margin="5"/>
-        </WrapPanel>
+        <TextBlock Text="Сортировка: " VerticalAlignment="Top" Margin="522,6,209,0"/>
+        <ComboBox SelectedIndex="0" SelectionChanged="CBSortiried_SelectionChanged" x:Name="CBSortiried" Margin="599,4,97,6"/>
+        <Button Margin="708,6,10,7" Content="Сортировать" Click="Button_Click_3"/>
         <ComboBox
                 x:Name="SortCB"
                 SelectionChanged="SortCB_SelectionChanged"
-                Text="Сортировка" Margin="180,5,510,5" />
+                Text="Сортировка" Margin="209,4,486,6" />
         <TextBox
-                Width="200"
-                Margin="5"
+                Margin="319,5,329,5"
                 Text=""
             x:Name="Poisk" TextChanged="Poisk_TextChanged"/>
-        <Button Content="поиск" HorizontalAlignment="Left" Margin="501,6,0,0" VerticalAlignment="Top" Width="41" Click="Button_Click_1"/>
+        <Button Content="поиск" HorizontalAlignment="Left" Margin="476,5,0,7" Width="41" Click="Button_Click_1"/>
     </Grid>
 </Window>

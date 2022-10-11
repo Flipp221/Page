@@ -79,6 +79,7 @@ namespace Page
         private void SortiriedCB()
         {
             CBSortiried.Items.Add("Цена");
+            CBSortiried.Items.Add("По алфавиту");
         }
         private void RefreshButtons()
         {
@@ -122,10 +123,7 @@ namespace Page
 
         private void CBSortiried_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            sort = CBSortiried.SelectedItem.ToString();
-            var r = from gg in db.Material
-                    orderby gg.Cost
-                    select gg;
+
         }
         private void RefreshFilter()
         {
@@ -157,7 +155,7 @@ namespace Page
                 if (flig.Name == Poisk.Text.Trim())
                 {
                     b++;
-                    DGWrites.ItemsSource = MainWindow.db.Product.Where(c => c.Name.ToLower() == Poisk.Text.ToLower()).ToList(); 
+                    DGWrites.ItemsSource = MainWindow.db.Product.Where(c => c.Name.ToLower() == Poisk.Text.ToLower()).ToList();
                 }
             }
             if (b == 0)
@@ -168,6 +166,25 @@ namespace Page
 
         private void Poisk_TextChanged(object sender, TextChangedEventArgs e)
         {
+
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            if (CBSortiried.Text == "По алфавиту")
+            {
+                var query = (from word in db.Product
+                             orderby word.Name
+                             select word).ToList();
+                DGWrites.ItemsSource = query;
+            }
+            if (CBSortiried.Text == "Цена")
+            {
+                var f = (from word in db.Product
+                         orderby word.MinCostForAgent
+                         select word).ToList();
+                DGWrites.ItemsSource = f;
+            }
 
         }
     }
