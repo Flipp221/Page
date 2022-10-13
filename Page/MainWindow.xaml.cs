@@ -26,16 +26,8 @@ namespace Page
         public MainWindow()
         {
             InitializeComponent();
-            var allTypes = Model.ToiletPaperEntities1.GetContext().TypeProd.ToList();
-            allTypes.Insert(0, new Model.TypeProd
-            {
-                NameType = "Фильтрация"
-            });
-            SortCB.ItemsSource = allTypes;
-            SortCB.SelectedIndex = 0;
-            var currentProduct = Model.ToiletPaperEntities1.GetContext().Product.ToList();
-            DGWrites.ItemsSource = currentProduct;
             RefreshComboBox();
+            RefreshFilter();
             RefreshButtons();
             SortiriedCB();
             UpdateTovar();
@@ -138,10 +130,25 @@ namespace Page
         {
 
         }
+        private void RefreshFilter()
+        {
+            foreach (var item in db.TypeProd)
+                SortCB.Items.Add(item.NameType);
+        }
 
         private void SortCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateTovar();
+            ComboBox combobox = (ComboBox)sender;
+            string item = Convert.ToString(combobox.SelectedItem);
+
+            if (item == "Фильтрация")
+            {
+                DGWrites.ItemsSource = users;
+                return;
+            }
+
+            products = db.Product.Where(z => z.TypeProd.NameType == item).ToList();
+            DGWrites.ItemsSource = products;
         }
 
         private void Poisk_TextChanged(object sender, TextChangedEventArgs e)
