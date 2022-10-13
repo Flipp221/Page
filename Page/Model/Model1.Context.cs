@@ -15,9 +15,16 @@ namespace Page.Model
     
     public partial class ToiletPaperEntities1 : DbContext
     {
+        private static ToiletPaperEntities1 _context;
         public ToiletPaperEntities1()
             : base("name=ToiletPaperEntities1")
         {
+        }
+        public static ToiletPaperEntities1 GetContext()
+        {
+            if (_context == null)
+                    _context = new ToiletPaperEntities1();
+            return _context;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

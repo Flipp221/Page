@@ -40,11 +40,9 @@
         </WrapPanel>
         <ComboBox Text="Сортировка" IsEditable="True" IsReadOnly="True" SelectedIndex="0" SelectionChanged="CBSortiried_SelectionChanged" x:Name="CBSortiried" Margin="472,4,216,6"/>
         <ComboBox
-                Text="Филтрация"
-                IsEditable="True"
-                IsReadOnly="True"
                 x:Name="SortCB"
                 SelectionChanged="SortCB_SelectionChanged"
+                DisplayMemberPath="NameType"
                 Margin="353,4,342,6" />
         <TextBox Margin="5,3,472,5"
                  x:Name="Poisk" 

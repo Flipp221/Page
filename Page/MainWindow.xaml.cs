@@ -26,10 +26,20 @@ namespace Page
         public MainWindow()
         {
             InitializeComponent();
+            var allTypes = Model.ToiletPaperEntities1.GetContext().TypeProd.ToList();
+            allTypes.Insert(0, new Model.TypeProd
+            {
+                NameType = "Фильтрация"
+            });
+            SortCB.ItemsSource = allTypes;
+            SortCB.SelectedIndex = 0;
+            var currentProduct = Model.ToiletPaperEntities1.GetContext().Product.ToList();
+            DGWrites.ItemsSource = currentProduct;
             RefreshComboBox();
             RefreshButtons();
             SortiriedCB();
-            RefreshFilter();
+            UpdateTovar();
+
         }
 
         private void CBNumberWrite_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -65,7 +75,6 @@ namespace Page
         }
         int pageSize;
         int pageNumber;
-        string sort;
         List<Model.Product> users = db.Product.ToList();
         private void RefreshPagination()
         {
@@ -129,30 +138,23 @@ namespace Page
         {
 
         }
-        private void RefreshFilter()
-        {
-            foreach (var item in db.TypeProd)
-                SortCB.Items.Add(item.NameType);
-        }
 
         private void SortCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox combobox = (ComboBox)sender;
-            string item = Convert.ToString(combobox.SelectedItem);
-
-            if (item == "Фильтрация")
-            {
-                DGWrites.ItemsSource = users;
-                return;
-            }
-
-            products = db.Product.Where(z => z.TypeProd.NameType == item).ToList();
-            DGWrites.ItemsSource = products;
+            UpdateTovar();
         }
 
         private void Poisk_TextChanged(object sender, TextChangedEventArgs e)
         {
-            DGWrites.ItemsSource = products.Where(x => x.Name.Contains(Poisk.Text)).ToList();
+            UpdateTovar();
+        }
+        private void UpdateTovar()
+        {
+            var current = Model.ToiletPaperEntities1.GetContext().Product.ToList();
+
+            current = current.Where(p => p.Name.ToLower().Contains(Poisk.Text.ToLower())).ToList();
+
+            DGWrites.ItemsSource = current.OrderBy(p => p.Name).ToList();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
