@@ -21,7 +21,7 @@ namespace Page
     public partial class MainWindow : Window
     {
         int b;
-        public static Model.ToiletPaperEntities db = new Model.ToiletPaperEntities();
+        public static Model.ToiletPaperEntities1 db = new Model.ToiletPaperEntities1();
         public List<Model.Product> products = new List<Model.Product>();
         public MainWindow()
         {
@@ -92,9 +92,11 @@ namespace Page
                     button.Content = i + 1;
                     button.Click += Button_Click;
                     button.Margin = new Thickness(5);
-                    button.Width = 50;
-                    button.Height = 50;
-                    button.FontSize = 20;
+                    button.Width = 20;
+                    button.Height = 20;
+                    button.FontSize = 12;
+                    button.Background = null;
+                    button.BorderBrush = null;
                     WPButtons.Children.Add(button);
                 }
             }
@@ -106,9 +108,11 @@ namespace Page
                     button.Content = i + 1;
                     button.Click += Button_Click;
                     button.Margin = new Thickness(5);
-                    button.Width = 50;
-                    button.Height = 50;
-                    button.FontSize = 20;
+                    button.Width = 20;
+                    button.Height = 20;
+                    button.FontSize = 12;
+                    button.Background = null;
+                    button.BorderBrush = null;
                     WPButtons.Children.Add(button);
                 }
             }
@@ -127,8 +131,6 @@ namespace Page
         }
         private void RefreshFilter()
         {
-            SortCB.Items.Add("Фильтрация");
-
             foreach (var item in db.TypeProd)
                 SortCB.Items.Add(item.NameType);
         }

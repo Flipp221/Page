@@ -13,10 +13,10 @@ namespace Page.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ToiletPaperEntities : DbContext
+    public partial class ToiletPaperEntities1 : DbContext
     {
-        public ToiletPaperEntities()
-            : base("name=ToiletPaperEntities")
+        public ToiletPaperEntities1()
+            : base("name=ToiletPaperEntities1")
         {
         }
     

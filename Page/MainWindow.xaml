@@ -5,26 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Page"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="#FFFFFF" Foreground="#00CC76">
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="#FFFFFF" Foreground="#00CC76">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <WrapPanel>
-            <TextBlock Text="Количество записей: " Margin="5" VerticalAlignment="Center"/>
-            <ComboBox SelectedIndex="0" SelectionChanged="CBNumberWrite_SelectionChanged" x:Name="CBNumberWrite" Margin="5"/>
-        </WrapPanel>
-        <DataGrid Margin="5" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" x:Name="DGWrites" Background="#CEFFF9">
-            <DataGrid.Columns>
+        <ComboBox SelectedIndex="0" SelectionChanged="CBNumberWrite_SelectionChanged" x:Name="CBNumberWrite" Margin="731,3,23,5" Background="Black" BorderBrush="Black"/>
+        <DataGrid Margin="5" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" x:Name="DGWrites" >
+            <DataGrid.Columns >
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Image Source="{Binding Picture}" Height="50"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn >
                 <DataGridTextColumn Binding="{Binding Name}" Header="Наименование продукта" Width="*" />
                 <DataGridTextColumn Binding="{Binding TypeProd.NameType}" Header="Тип продукта" Width="*" />
                 <DataGridTextColumn Binding="{Binding Material.MaterialProd.NameMaterials}" Header="Артикул" Width="*" />
@@ -33,25 +30,47 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="Kol" Click="Kol_Click" Content="Добавить" Margin="38,3,675,4" Background="#CEFFF9" Grid.Row="2"/>
-        <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,40,0">
 
-            <Button x:Name="BLeft" Click="BLeft_Click" Content="&lt;" Width="50" Margin="5" Background="#CEFFF9"/>
-            <ScrollViewer MaxWidth="300" Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <Button x:Name="BLeft" Click="BLeft_Click" Content="&lt;" Width="19" Background="{x:Null}" BorderBrush="{x:Null}" Height="22"/>
+            <ScrollViewer MaxWidth="100" Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <WrapPanel x:Name="WPButtons"/>
             </ScrollViewer>
-            <Button x:Name="BRight" Click="BRight_Click" Content="&gt;" Margin="5" Width="50" Background="#CEFFF9"/>
+            <Button x:Name="BRight" Click="BRight_Click" Content="&gt;" Width="19" Background="{x:Null}" BorderBrush="{x:Null}" Height="21"/>
         </WrapPanel>
-        <TextBlock Text="Сортировка: " VerticalAlignment="Top" Margin="522,6,198,0"/>
-        <ComboBox SelectedIndex="0" SelectionChanged="CBSortiried_SelectionChanged" x:Name="CBSortiried" Margin="599,4,89,6"/>
-        <Button Margin="708,6,10,7" Content="Сортировать" Click="Button_Click_3"/>
+        <ComboBox Text="Сортировка" IsEditable="True" IsReadOnly="True" SelectedIndex="0" SelectionChanged="CBSortiried_SelectionChanged" x:Name="CBSortiried" Margin="472,4,216,6"/>
         <ComboBox
+                Text="Филтрация"
+                IsEditable="True"
+                IsReadOnly="True"
                 x:Name="SortCB"
                 SelectionChanged="SortCB_SelectionChanged"
-                Text="Сортировка" Margin="209,4,486,6" />
-        <TextBox
-                Margin="319,5,329,5"
-                Text=""
-            x:Name="Poisk" TextChanged="Poisk_TextChanged"/>
-
+                Margin="353,4,342,6" />
+        <TextBox Margin="5,3,472,5"
+                 x:Name="Poisk" 
+                 TextChanged="Poisk_TextChanged">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Введите для поиска" Foreground="LightGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
     </Grid>
 </Window>
