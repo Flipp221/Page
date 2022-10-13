@@ -128,7 +128,7 @@ namespace Page
 
         private void CBSortiried_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Sortiried();
         }
         private void RefreshFilter()
         {
@@ -160,6 +160,20 @@ namespace Page
             var current = Model.ToiletPaperEntities1.GetContext().Product.ToList();
 
             current = current.Where(p => p.Name.ToLower().Contains(Poisk.Text.ToLower())).ToList();
+
+            DGWrites.ItemsSource = current.OrderBy(p => p.Name).ToList();
+        }
+        private void Sortiried()
+        {
+            var current = Model.ToiletPaperEntities1.GetContext().Product.ToList();
+            if (CBSortiried.Text == "По алфавиту")
+            {
+                current = current.Where(p => p.Name.ToLower().Contains(CBSortiried.Text.ToLower())).ToList();
+            }
+            //if (CBSortiried.Text == "Цена")
+            //{
+            //    current = current.Where(p => p.MinCostForAgent.ToLower().Contains(CBSortiried.Text.ToLower())).ToList();
+            //}
 
             DGWrites.ItemsSource = current.OrderBy(p => p.Name).ToList();
         }
